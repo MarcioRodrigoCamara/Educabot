@@ -1,58 +1,95 @@
+"""
+Motor de IA
+EducaBot 3.0
+"""
+
+import logging
+
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
-from faq import carregar_faq
-from config import SIMILARIDADE_MINIMA
+from config import (
+    MODELO_IA,
+    MODELOS_DIR,
+    SIMILARIDADE_MINIMA,
+)
 
-print("🧠 Carregando modelo de IA...")
+from faq import faq
 
-from config import MODELO_IA, MODELOS_DIR
+logger = logging.getLogger("EducaBot")
+
+logger.info("Carregando modelo de IA...")
 
 modelo = SentenceTransformer(
     MODELO_IA,
     cache_folder=str(MODELOS_DIR)
 )
 
-faq = carregar_faq()
+logger.info("Gerando embeddings...")
 
-perguntas = [
-    item["pergunta"]
-    for item in faq
-]
+perguntas = faq.perguntas()
 
-respostas = [
-    item["resposta"]
-    for item in faq
-]
+respostas = faq.respostas()
 
 embeddings = modelo.encode(
     perguntas,
-    convert_to_tensor=False
+    normalize_embeddings=True
+)
+
+logger.info(
+    "%s embeddings gerados.",
+    len(embeddings)
 )
 
 
-def buscar_resposta(pergunta_usuario):
+def buscar_resposta(pergunta: str):
 
-    embedding_usuario = modelo.encode(
-        [pergunta_usuario],
-        convert_to_tensor=False
+    if not pergunta.strip():
+
+        return {
+
+            "encontrou": False,
+
+            "score": 0.0,
+
+            "resposta": "Digite uma pergunta."
+
+        }
+
+    embedding = modelo.encode(
+        [pergunta],
+        normalize_embeddings=True
     )
 
     similaridades = cosine_similarity(
-        embedding_usuario,
+        embedding,
         embeddings
     )[0]
 
     indice = similaridades.argmax()
 
-    score = float(similaridades[indice])
+    score = float(
+        similaridades[indice]
+    )
+
+    logger.info(
+        "Similaridade %.3f",
+        score
+    )
 
     if score < SIMILARIDADE_MINIMA:
 
         return {
+
             "encontrou": False,
+
             "score": score,
-            "resposta": None
+
+            "resposta": (
+                "Não encontrei essa informação "
+                "no FAQ."
+            )
+
         }
 
     return {
@@ -64,3 +101,25 @@ def buscar_resposta(pergunta_usuario):
         "resposta": respostas[indice]
 
     }
+
+
+def recarregar():
+
+    global perguntas
+    global respostas
+    global embeddings
+
+    faq.carregar()
+
+    perguntas = faq.perguntas()
+
+    respostas = faq.respostas()
+
+    embeddings = modelo.encode(
+        perguntas,
+        normalize_embeddings=True
+    )
+
+    logger.info(
+        "Embeddings atualizados."
+    )

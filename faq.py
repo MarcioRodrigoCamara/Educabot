@@ -1,34 +1,80 @@
+"""
+Gerenciamento do FAQ
+EducaBot 3.0
+"""
+
 import json
-from pathlib import Path
+import logging
 
-# Caminho da pasta do projeto
-BASE_DIR = Path(__file__).resolve().parent
+from config import FAQ_FILE
 
-# Caminho do FAQ
-FAQ_FILE = BASE_DIR / "dados" / "faq.json"
+logger = logging.getLogger("EducaBot")
 
 
-def carregar_faq():
-    """
-    Carrega o FAQ em memória.
-    """
+class FAQ:
 
-    if not FAQ_FILE.exists():
-        raise FileNotFoundError(
-            f"Arquivo não encontrado: {FAQ_FILE}"
+    def __init__(self):
+
+        self.dados = []
+
+        self.carregar()
+
+    def carregar(self):
+
+        logger.info("Carregando FAQ...")
+
+        try:
+
+            with open(
+                FAQ_FILE,
+                "r",
+                encoding="utf-8"
+            ) as arquivo:
+
+                self.dados = json.load(arquivo)
+
+        except FileNotFoundError:
+
+            logger.error(
+                "FAQ não encontrado."
+            )
+
+            self.dados = []
+
+        except Exception as erro:
+
+            logger.exception(erro)
+
+            self.dados = []
+
+        logger.info(
+            "%s perguntas carregadas.",
+            len(self.dados)
         )
 
-    with open(FAQ_FILE, "r", encoding="utf-8") as arquivo:
-        faq = json.load(arquivo)
+    def perguntas(self):
 
-    return faq
+        return [
+
+            item["pergunta"]
+
+            for item in self.dados
+
+        ]
+
+    def respostas(self):
+
+        return [
+
+            item["resposta"]
+
+            for item in self.dados
+
+        ]
+
+    def quantidade(self):
+
+        return len(self.dados)
 
 
-def perguntas():
-    faq = carregar_faq()
-    return [item["pergunta"] for item in faq]
-
-
-def respostas():
-    faq = carregar_faq()
-    return [item["resposta"] for item in faq]
+faq = FAQ()

@@ -1,31 +1,14 @@
-# 🤖 EducaBot 2.0
+# 🤖 EducaBot 3.0
 
 Assistente Virtual do Educacenso desenvolvido em Python.
 
-## Tecnologias
+## Recursos
 
-- Python 3.12+
-- python-telegram-bot
-- Sentence Transformers
-- Scikit-learn
-- Render
+- Busca semântica com IA
+- FAQ em JSON
+- Telegram Bot
+- Webhook para Render
+- Logs automáticos
+- Estrutura modular
 
 ## Estrutura
-
-app.py → Inicialização
-
-bot.py → Telegram
-
-ia.py → Busca Inteligente
-
-faq.py → FAQ
-
-config.py → Configurações
-
-## Deploy
-
-Render
-
-## Autor
-
-Márcio Rodrigo Câmara

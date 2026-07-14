@@ -1,36 +1,32 @@
+"""
+EducaBot 3.0
+Autor: Márcio Rodrigo Câmara
+
+Arquivo principal
+"""
+
 import logging
+import os
 
-from telegram.ext import ApplicationBuilder
+from telegram.ext import Application
 
-from config import (
-    TOKEN,
-    PORT,
-    WEBHOOK_URL,
-)
-
+from config import TOKEN
 from bot import registrar_handlers
 
 logging.basicConfig(
-
-    format="%(asctime)s - %(levelname)s - %(message)s",
-
-    level=logging.INFO
-
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s"
 )
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("EducaBot")
 
 
-def criar_app():
+def criar_aplicacao() -> Application:
 
     app = (
-
-        ApplicationBuilder()
-
+        Application.builder()
         .token(TOKEN)
-
         .build()
-
     )
 
     registrar_handlers(app)
@@ -38,35 +34,40 @@ def criar_app():
     return app
 
 
-def main():
+def executar():
 
-    logger.info("🤖 Iniciando EducaBot...")
+    logger.info("=" * 60)
+    logger.info("🤖 EducaBot 3.0")
+    logger.info("=" * 60)
 
-    app = criar_app()
+    app = criar_aplicacao()
 
-    if WEBHOOK_URL:
+    # Render
+    if os.getenv("RENDER"):
 
-        logger.info("🌎 Executando em Webhook")
+        logger.info("Modo Render")
 
         app.run_webhook(
 
             listen="0.0.0.0",
 
-            port=PORT,
+            port=int(os.getenv("PORT", 10000)),
 
-            webhook_url=WEBHOOK_URL,
+            url_path=TOKEN,
 
-            secret_token="educabot"
+            webhook_url=f"{os.getenv('RENDER_EXTERNAL_URL')}/{TOKEN}"
 
         )
 
     else:
 
-        logger.info("💻 Executando localmente")
+        logger.info("Modo Local")
 
-        app.run_polling()
+        app.run_polling(
+            allowed_updates=Application.ALL_TYPES
+        )
 
 
 if __name__ == "__main__":
 
-    main()
+    executar()

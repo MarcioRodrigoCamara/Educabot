@@ -2,20 +2,19 @@
 __pycache__/
 *.py[cod]
 *.pyo
-*.pyd
 
-# Virtual Environment
+# Ambientes virtuais
 venv/
-.env/
+.env
 
 # Logs
 logs/
 *.log
 
-# IA
+# Modelos de IA
 modelos/
 
-# IDE
+# IDEs
 .vscode/
 .idea/
 
