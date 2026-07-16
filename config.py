@@ -1,69 +1,38 @@
-"""
-Configurações do EducaBot 3.0
-"""
-
 import os
+import logging
 from pathlib import Path
 
-# =====================================================
-# Diretórios
-# =====================================================
-
+# Base Directory
 BASE_DIR = Path(__file__).resolve().parent
 
+# Configurações do Telegram
+TOKEN = os.getenv("TELEGRAM_TOKEN", "")
+WEBHOOK_URL = os.getenv("WEBHOOK_URL", "")  # URL do Render (ex: https://meu-app.onrender.com)
+
+# Configurações do Servidor
+PORT = int(os.getenv("PORT", 8000))
+
+# Configurações de Dados
 DADOS_DIR = BASE_DIR / "dados"
+FAQ_JSON_PATH = DADOS_DIR / "faq.json"
 
-LOGS_DIR = BASE_DIR / "logs"
+# Configurações de Logs
+LOG_DIR = BASE_DIR / "logs"
+LOG_FILE = LOG_DIR / "educabot.log"
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
 
-MODELOS_DIR = BASE_DIR / "modelos"
+# Garantir que os diretórios existam
+DADOS_DIR.mkdir(exist_ok=True)
+LOG_DIR.mkdir(exist_ok=True)
 
-FAQ_FILE = DADOS_DIR / "faq.json"
-
-# =====================================================
-# Telegram
-# =====================================================
-
-TOKEN = os.getenv("TOKEN")
-
-if not TOKEN:
-    raise RuntimeError(
-        "A variável TOKEN não foi configurada."
-    )
-
-# =====================================================
-# Servidor
-# =====================================================
-
-PORT = int(
-    os.getenv(
-        "PORT",
-        "10000"
-    )
+# Configuração de Logging
+logging.basicConfig(
+    level=getattr(logging, LOG_LEVEL),
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler(LOG_FILE),
+        logging.StreamHandler()
+    ]
 )
 
-RENDER_EXTERNAL_URL = os.getenv(
-    "RENDER_EXTERNAL_URL"
-)
-
-# =====================================================
-# IA
-# =====================================================
-
-MODELO_IA = (
-    "sentence-transformers/"
-    "paraphrase-multilingual-MiniLM-L12-v2"
-)
-
-SIMILARIDADE_MINIMA = 0.60
-
-# =====================================================
-# Criação automática das pastas
-# =====================================================
-
-LOGS_DIR.mkdir(
-    exist_ok=True
-)
-
-MODELOS_DIR.mkdir(
-    exist_ok=True
-)
+logger = logging.getLogger("EducaBot")

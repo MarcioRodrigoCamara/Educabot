@@ -1,23 +1,18 @@
 # Python
 __pycache__/
 *.py[cod]
-*.pyo
-
-# Ambientes virtuais
+*$py.class
+.venv/
 venv/
-.env
+ENV/
 
 # Logs
 logs/
 *.log
 
-# Modelos de IA
-modelos/
+# Dados
+# dados/faq.json  # Mantido para deploy inicial
 
-# IDEs
-.vscode/
-.idea/
-
-# Sistema
+# OS
 .DS_Store
-Thumbs.db
+.env

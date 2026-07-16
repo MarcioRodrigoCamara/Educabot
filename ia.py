@@ -1,125 +1,66 @@
-"""
-Motor de IA
-EducaBot 3.0
-"""
-
-import logging
-
-from sentence_transformers import SentenceTransformer
+import numpy as np
+from typing import Optional, Tuple
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from faq import GerenciadorFAQ
+from config import logger
 
-from config import (
-    MODELO_IA,
-    MODELOS_DIR,
-    SIMILARIDADE_MINIMA,
-)
+class MotorIA:
+    """Motor de busca semântica leve utilizando TF-IDF e Similaridade de Cosseno."""
+    
+    def __init__(self, gerenciador_faq: GerenciadorFAQ):
+        self.faq = gerenciador_faq
+        self.vectorizer = TfidfVectorizer()
+        self.tfidf_matrix = None
+        self.recarregar()
 
-from faq import faq
+    def recarregar(self) -> None:
+        """Recalcula a matriz TF-IDF baseada nas perguntas atuais do FAQ."""
+        perguntas = self.faq.perguntas()
+        if not perguntas:
+            logger.warning("IA: Nenhuma pergunta disponível para treinar o motor.")
+            self.tfidf_matrix = None
+            return
 
-logger = logging.getLogger("EducaBot")
+        try:
+            self.tfidf_matrix = self.vectorizer.fit_transform(perguntas)
+            logger.info("IA: Motor recarregado e treinado com sucesso.")
+        except Exception as e:
+            logger.error(f"IA: Erro ao treinar motor: {e}")
+            self.tfidf_matrix = None
 
-logger.info("Carregando modelo de IA...")
+    def buscar(self, consulta: str, threshold: float = 0.2) -> Optional[str]:
+        """
+        Busca a resposta mais relevante para a consulta do usuário.
+        
+        Args:
+            consulta: A pergunta feita pelo usuário.
+            threshold: Valor mínimo de similaridade para considerar a resposta válida.
+            
+        Returns:
+            A resposta correspondente ou None se não houver correspondência satisfatória.
+        """
+        if self.tfidf_matrix is None or not consulta:
+            return None
 
-modelo = SentenceTransformer(
-    MODELO_IA,
-    cache_folder=str(MODELOS_DIR)
-)
+        try:
+            # Transforma a consulta do usuário no mesmo espaço vetorial
+            query_vec = self.vectorizer.transform([consulta])
+            
+            # Calcula a similaridade de cosseno entre a consulta e todas as perguntas
+            similaridades = cosine_similarity(query_vec, self.tfidf_matrix).flatten()
+            
+            # Encontra o índice da maior similaridade
+            indice_max = np.argmax(similaridades)
+            valor_max = similaridades[indice_max]
 
-logger.info("Gerando embeddings...")
+            logger.info(f"Busca: '{consulta}' | Melhor score: {valor_max:.4f}")
 
-perguntas = faq.perguntas()
-
-respostas = faq.respostas()
-
-embeddings = modelo.encode(
-    perguntas,
-    normalize_embeddings=True
-)
-
-logger.info(
-    "%s embeddings gerados.",
-    len(embeddings)
-)
-
-
-def buscar_resposta(pergunta: str):
-
-    if not pergunta.strip():
-
-        return {
-
-            "encontrou": False,
-
-            "score": 0.0,
-
-            "resposta": "Digite uma pergunta."
-
-        }
-
-    embedding = modelo.encode(
-        [pergunta],
-        normalize_embeddings=True
-    )
-
-    similaridades = cosine_similarity(
-        embedding,
-        embeddings
-    )[0]
-
-    indice = similaridades.argmax()
-
-    score = float(
-        similaridades[indice]
-    )
-
-    logger.info(
-        "Similaridade %.3f",
-        score
-    )
-
-    if score < SIMILARIDADE_MINIMA:
-
-        return {
-
-            "encontrou": False,
-
-            "score": score,
-
-            "resposta": (
-                "Não encontrei essa informação "
-                "no FAQ."
-            )
-
-        }
-
-    return {
-
-        "encontrou": True,
-
-        "score": score,
-
-        "resposta": respostas[indice]
-
-    }
-
-
-def recarregar():
-
-    global perguntas
-    global respostas
-    global embeddings
-
-    faq.carregar()
-
-    perguntas = faq.perguntas()
-
-    respostas = faq.respostas()
-
-    embeddings = modelo.encode(
-        perguntas,
-        normalize_embeddings=True
-    )
-
-    logger.info(
-        "Embeddings atualizados."
-    )
+            if valor_max >= threshold:
+                item = self.faq.obter_item(int(indice_max))
+                return item.get("resposta") if item else None
+            
+            return None
+        except Exception as e:
+            logger.error(f"IA: Erro durante a busca: {e}")
+            return None
