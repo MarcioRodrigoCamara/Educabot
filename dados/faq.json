@@ -771,5 +771,82 @@
       "Correção",
       "Fechamento"
     ]
+  },
+  {
+    "pergunta": "Qual é a data de referência do Censo Escolar 2026",
+    "resposta": "A data de referência da primeira etapa do Censo Escolar 2026 (Matrícula Inicial) é 27 de maio de 2026.",
+    "categoria": "1ª Etapa da Coleta",
+    "palavras_chave": [
+      "Censo Escolar 2026",
+      "data de referência",
+      "data-base",
+      "27 de maio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o período de preenchimento do Censo Escolar 2026",
+    "resposta": "O período de coleta das informações da 1ª etapa do Censo Escolar 2026 (Matrícula Inicial) é de 27 de maio a 31 de julho de 2026.",
+    "categoria": "1ª Etapa da Coleta",
+    "palavras_chave": [
+      "Censo Escolar 2026",
+      "período",
+      "preenchimento",
+      "prazo",
+      "Matrícula Inicial"
+    ]
+  },
+  {
+    "pergunta": "Até quando ocorre a consulta prévia dos dados do Censo Escolar 2026",
+    "resposta": "A consulta prévia dos dados do Censo Escolar 2026 está prevista até 11 de setembro de 2026.",
+    "categoria": "1ª Etapa da Coleta",
+    "palavras_chave": [
+      "Censo Escolar 2026",
+      "consulta prévia",
+      "dados preliminares"
+    ]
+  },
+  {
+    "pergunta": "Qual é o período de conferência e retificação do Censo Escolar 2026",
+    "resposta": "O período de conferência e retificação dos dados do Censo Escolar 2026 está previsto de 24 de setembro a 23 de outubro de 2026.",
+    "categoria": "1ª Etapa da Coleta",
+    "palavras_chave": [
+      "Censo Escolar 2026",
+      "retificação",
+      "conferência",
+      "correção"
+    ]
+  },
+  {
+    "pergunta": "Quando ocorre a verificação pelas coordenações municipais no Censo Escolar 2026",
+    "resposta": "A verificação pelas coordenações municipais está prevista para o período de 26 a 30 de outubro de 2026.",
+    "categoria": "1ª Etapa da Coleta",
+    "palavras_chave": [
+      "Censo Escolar 2026",
+      "verificação",
+      "coordenações municipais"
+    ]
+  },
+  {
+    "pergunta": "Qual é o prazo para confirmação de matrículas duplicadas do Censo Escolar 2026",
+    "resposta": "O período previsto para confirmação de matrículas duplicadas do Censo Escolar 2026 é de 5 a 14 de novembro de 2026.",
+    "categoria": "1ª Etapa da Coleta",
+    "palavras_chave": [
+      "Censo Escolar 2026",
+      "matrículas duplicadas",
+      "duplicidade",
+      "confirmação"
+    ]
+  },
+  {
+    "pergunta": "Qual é o período de preenchimento da Situação do Aluno 2026",
+    "resposta": "A segunda etapa do Censo Escolar 2026, denominada Situação do Aluno, está prevista para ocorrer de 1º de fevereiro a 12 de março de 2027.",
+    "categoria": "2ª Etapa da Coleta",
+    "palavras_chave": [
+      "Situação do Aluno 2026",
+      "Censo Escolar 2026",
+      "segunda etapa",
+      "período",
+      "preenchimento"
+    ]
   }
 ]
