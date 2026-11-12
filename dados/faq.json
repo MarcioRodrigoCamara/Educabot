@@ -72,14 +72,6 @@
     ]
   },
   {
-    "pergunta": "Qual é o período de preenchimento do Censo Escolar 2025",
-    "resposta": "De acordo com a Portaria Inep nº 239, de 5 de maio de 2025, o período para a coleta das informações da 1ª etapa do Censo Escolar (Matrícula Inicial) é de 28 de maio a 31 de julho de 2025. O sistema será reaberto para conferências e retificações durante 30 dias, após a publicação dos dados preliminares no Diário Oficial da União. A data de referência do Censo Escolar 2025 é a última quarta-feira do mês de maio (28/05/2025).",
-    "categoria": "1ª Etapa da Coleta",
-    "palavras_chave": [
-      "Período"
-    ]
-  },
-  {
     "pergunta": "O que é \"Vincular\" no Sistema Educacenso",
     "resposta": "Vincular é o procedimento para o usuário relacionar um aluno ou profissional escolar a uma determinada turma, e o gestor escolar, a uma instituição.",
     "categoria": "1ª Etapa da Coleta",
@@ -208,14 +200,6 @@
     ]
   },
   {
-    "pergunta": "Qual é o período de preenchimento da Situação do Aluno 2025",
-    "resposta": "De acordo com a Portaria n.º 239 de 05 de maio de 2025, que define o cronograma de atividades do Censo Escolar 2024, o período para coleta das informações do módulo Situação do Aluno é de 2 de fevereiro a 13 de março de 2026. Após esse período, o Sistema Educacenso será reaberto para conferências e retificações, de 1º a 15 abril de 2026.",
-    "categoria": "2ª Etapa da Coleta",
-    "palavras_chave": [
-      "Aluno"
-    ]
-  },
-  {
     "pergunta": "Quais são as informações coletadas no módulo Situação do Aluno",
     "resposta": "O módulo Situação do Aluno, segunda etapa do Censo Escolar, coleta informações sobre o rendimento (aprovado ou reprovado) e o movimento (transferido, deixou de frequentar ou falecido) dos alunos ao final do ano letivo. Além disso, coleta informações sobre alunos concluintes (séries/anos finais), sem movimentação (SM) na educação infantil, e que se encontram em curso em andamento (CA) na educação de jovens e adultos e educação profissional.",
     "categoria": "2ª Etapa da Coleta",
@@ -237,14 +221,6 @@
     "categoria": "2ª Etapa da Coleta",
     "palavras_chave": [
       "Módulo"
-    ]
-  },
-  {
-    "pergunta": "Quais escolas devem responder à Situação do Aluno",
-    "resposta": "Todas as escolas, públicas e privadas, que informaram matrículas de escolarização na primeira etapa do Censo Escolar 2024 (Matrícula inicial) devem responder à Situação do Aluno. Além disso, as escolas paralisadas que realizaram o fechamento do Censo Escolar na primeira etapa da coleta e as escolas novas que iniciaram suas atividades depois da data de referência do Censo Escolar 2025 (28 de maio de 2025) poderão admitir após os alunos que foram informados na primeira etapa em outras instituições.",
-    "categoria": "2ª Etapa da Coleta",
-    "palavras_chave": [
-      "Escolas"
     ]
   },
   {
@@ -337,10 +313,14 @@
   },
   {
     "pergunta": "Posso admitir após o censo um aluno em uma turma que iniciou as atividades após a data de referência do Censo Escolar",
-    "resposta": "Sim. Caso o aluno tenha um vínculo de escolarização no Censo Escolar 2024 e tenha entrado na escola em uma turma que começou a funcionar após a data de referência do Censo Escolar (28 de maio de 2025), é necessário admiti-lo na opção Turma Nova. Após selecionar essa opção, o usuário deverá informar o tipo de mediação didático-pedagógica, a modalidade e a etapa do aluno.",
+    "resposta": "Caso o aluno tenha sido admitido em uma turma que iniciou suas atividades após a data de referência do Censo Escolar e, por isso, não tenha sido cadastrada na 1ª etapa do Censo Escolar (Matrícula Inicial), será necessário registrá-lo por meio da opção 'Cadastrar nova turma — 2ª etapa do Censo Escolar'. Após selecionar essa opção, deverão ser informadas as características da nova turma, como o tipo de mediação didático-pedagógica e a etapa de ensino do aluno. Em seguida, deverá ser declarada a situação do aluno ao final do ano letivo.",
     "categoria": "2ª Etapa da Coleta",
     "palavras_chave": [
-      "Aluno"
+      "Aluno",
+      "Admissão após o Censo",
+      "Cadastrar nova turma",
+      "Turma Nova",
+      "Situação do Aluno"
     ]
   },
   {
@@ -453,14 +433,6 @@
     "categoria": "Educação Especial e AEE",
     "palavras_chave": [
       "Específicos"
-    ]
-  },
-  {
-    "pergunta": "Quais os tipos de transtornos funcionais específicos (TFE) coletados no Censo Escolar a partir de 2025",
-    "resposta": "A partir do Censo Escolar 2025, serão coletados os seguintes transtornos funcionais específicos (TFE): Transtorno de Déficit de Atenção e Hiperatividade (TDAH), Dislexia, Disgrafia, Disortografia, Discalculia, Dislalia e Transtorno do Processamento Auditivo Central (TPAC).",
-    "categoria": "Educação Especial e AEE",
-    "palavras_chave": [
-      "TFE"
     ]
   },
   {
@@ -693,16 +665,6 @@
     ]
   },
   {
-    "pergunta": "Como declarar os dados de aluno no Sistema Educacenso 2025?",
-    "resposta": "A declaração de dados de aluno é realizada no menu Primeira Etapa > Aluno, onde o usuário pode pesquisar, cadastrar, editar e vincular alunos às turmas. O acesso é feito com CPF e senha pelo endereço educacenso.inep.gov.br/EducaCenso.",
-    "categoria": "Tutoriais Censo Escolar 2025",
-    "palavras_chave": [
-      "Aluno",
-      "Declaração",
-      "Cadastro"
-    ]
-  },
-  {
     "pergunta": "Quais informações são obrigatórias no cadastro de aluno?",
     "resposta": "São obrigatórios campos como CPF, nome completo, data de nascimento, cor/raça e endereço residencial. Quando o país de residência for Brasil, os campos Localização da Residência e Localização Diferenciada tornam-se obrigatórios.",
     "categoria": "Tutoriais Censo Escolar 2025",
@@ -710,16 +672,6 @@
       "Obrigatório",
       "Cadastro",
       "Residência"
-    ]
-  },
-  {
-    "pergunta": "Quais são as principais mudanças no questionário de aluno do Censo Escolar 2025?",
-    "resposta": "As principais mudanças incluem: (1) campo Povo Indígena, exibido quando marcada a opção Cor/Raça indígena; (2) campo Aluno com Transtorno que Impacta o Desenvolvimento da Aprendizagem, com opções como dislexia, TDAH e outros; e (3) inclusão da opção Tempo Adicional no campo Aluno Necessita de Recursos para Uso em Sala de Aula e Avaliações do Inep (Saeb).",
-    "categoria": "Tutoriais Censo Escolar 2025",
-    "palavras_chave": [
-      "Questionário",
-      "Transtornos",
-      "Indígena"
     ]
   },
   {
